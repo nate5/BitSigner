@@ -1,20 +1,11 @@
-coinbin
-=======
+How to use via Tor:
 
-A Open Source Browser Based Bitcoin Wallet.
+1. Open the Tor Browser Bundle (TBB)
+2. Navigate to the home.html page
+  1. Either Copy/Paste the location or type in "file:///" in the navbar and navigate to wherever you extracted the .zip to.
+3. Follow instructions there
 
-Version 1.0 beta by OutCast3k - http://coinb.in/
 
-Coinb.in supports a number of key features such as: 
+Original by OutCast3k - http://coinb.in/
 
-- Offline Compressed & uncompressed Address creation.
-- Offline Multisignature Address creation.
-- Supports compressed and uncompressed keys.
-- "In browser" Key (re)generation. 
-- Ability to decode transactions, redeem scripts and more offline.
-- Send and receive payments.
-- Build custom transactions offline.
-- Sign transactions offline.
-- Broadcast custom transactions.
-
-Donate to 1CWHWkTWaq1K5hevimJia3cyinQsrgXUvg to see more development such as HD Wallet intergration.
+Edits by ProbableFire
