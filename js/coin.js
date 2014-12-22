@@ -19,7 +19,7 @@
 	coinjs.developer = '1CWHWkTWaq1K5hevimJia3cyinQsrgXUvg';
 
 	/* bit(coinb.in) api vars */
-	coinjs.host = ('https:'==document.location.protocol?'https://':'http://')+'coinb.in/api/';
+	coinjs.host = 'http://coinb.in/api/';
 	coinjs.uid = '1';
 	coinjs.key = '12345678901234567890123456789012';
 
@@ -373,7 +373,7 @@
 			var o = {};
 			o.outpoint = {'hash':txid, 'index':index};
 			o.script = coinjs.script(script||[]);
-			o.sequence = (r.lock_time==0) ? 4294967295 : 0;
+			o.sequence = 4294967295;
 			return this.ins.push(o);
 		}
 
@@ -401,30 +401,16 @@
 				var total = 0;
 				var x = {};
 
-				if (window.DOMParser) {
-					parser=new DOMParser();
-					xmlDoc=parser.parseFromString(data,"text/xml");
-				} else {
-					xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
-					xmlDoc.async=false;
-					xmlDoc.loadXML(data);
-				}
-
-				var unspent = xmlDoc.getElementsByTagName("unspent")[0];
-
+				var unspent = data.getElementsByTagName("unspent")[0];
 				for(i=1;i<=unspent.childElementCount;i++){
-					var u = xmlDoc.getElementsByTagName("unspent_"+i)[0]
-					var txhash = (u.getElementsByTagName("tx_hash")[0].childNodes[0].nodeValue).match(/.{1,2}/g).reverse().join("")+'';
+					var u = data.getElementsByTagName("unspent_"+i)[0]
+					var txhash = u.getElementsByTagName("tx_hash")[0].childNodes[0].nodeValue;
 					var n = u.getElementsByTagName("tx_output_n")[0].childNodes[0].nodeValue;
-					var script = u.getElementsByTagName("script")[0].childNodes[0].nodeValue;
-
-					self.addinput(txhash, n, script);
-
 					value += u.getElementsByTagName("value")[0].childNodes[0].nodeValue*1;
 					total++;
 				}
 
-				x.unspent = $(xmlDoc).find("unspent");
+				x.unspent = $(data).find("unspent");
 				x.value = value;
 				x.total = total;
 				return callback(x);
@@ -443,7 +429,7 @@
 
 		/* broadcast a transaction */
 		r.broadcast = function(callback, txhex){
-			var tx = txhex || this.serialize();
+			var tx = txhex || this.serialize()
 			coinjs.ajax(coinjs.host+'?uid='+coinjs.uid+'&key='+coinjs.key+'&setmodule=bitcoin&request=sendrawtransaction&rawtx='+tx+'&r='+Math.random(), callback, "GET");
 		}
 
@@ -711,7 +697,7 @@
 				});
 			}
 
- 			obj.lock_time = readAsInt(4);
+ 			obj.locktime = readAsInt(4);
 			return obj;
 		}
 
@@ -892,7 +878,7 @@
 	}
 
 	coinjs.numToBytes = function(num,bytes) {
-		if (typeof bytes === undefined) bytes = 8;
+		if (bytes === undefined) bytes = 8;
 		if (bytes == 0) { 
 			return [];
 		} else {
