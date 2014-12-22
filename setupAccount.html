@@ -1,0 +1,130 @@
+<!DOCTYPE html> 
+<html lang="en">
+	<head>
+		
+		<title>Account Setup</title>
+
+        	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<meta name="keywords" content="" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
+		<link rel="stylesheet" href="css/style.css" media="screen">
+		
+		<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+		<script type="text/javascript" src="js/crypto-min.js"></script>
+		<script type="text/javascript" src="js/crypto-sha256.js"></script>
+		<script type="text/javascript" src="js/ripemd160.js"></script>
+
+		<script type="text/javascript" src="js/jsbn.js"></script>
+		<script type="text/javascript" src="js/ellipticcurve.js"></script>
+		<script type="text/javascript" src="js/securerandom.js"></script>
+
+		<script type="text/javascript" src="js/coin.js"></script>
+
+		<script type="text/javascript" src="js/coinbin.js"></script>
+	</head>
+
+	<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-24788352-1']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	</script>
+
+	<body>
+		<div id="wrap">
+			<!-- Fixed navbar -->
+			<div id="header" class="navbar navbar-default " role="navigation">
+				<div class="container">
+					<div class="collapse navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li class="dropdown">
+								<li><a href="index.html"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+								<li class="active"><a href="setupAccount.html"><span class="glyphicon glyphicon-cog"></span> Setup Account</a></li>
+								<li><a href="easySign.html"><span class="glyphicon glyphicon-flash"></span> Redeem Bitcoin (Easy)</a></li>
+								<li><a href="hardSign.html"><span class="glyphicon glyphicon-lock"></span> Redeem Bitcoin (Most Secure)</a></li>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div id="content" class="container">
+				
+				<div class="alert alert-danger hidden" id="isConnected">
+					<span class="glyphicon glyphicon-exclamation-sign"></span> <b>WARNING</b>: You are connected to the internet! Click <a href='home.html#internetWarning' target="_blank" class="alert-link">HERE</a> to learn why this could be dangerous.
+					
+				</div>
+
+				<noscript>
+					<div class="alert alert-danger" id="javascript">
+						<span class="glyphicon glyphicon-info-sign"></span> This page uses javascript, please enable it to continue!
+					</div>
+				</noscript>
+
+				<div class="tab-content">
+					<div class="tab-pane tab-content active" id="home">
+						<div class="row">
+							<div class="col-md-12">
+								<!--<h2>Open Wallet <small> browser based bitcoin wallet</small></h2>-->
+								<div id="openLogin">
+									<form class="form-signin" role="form" action="javascript:;">
+										
+
+										<div class="alert alert-warning">
+											<span class="glyphicon glyphicon-info-sign"></span> <b>Notice</b>: Different username and password combinations will open different wallets, be careful when entering your details as lost accounts can not be recovered! 
+										</div>
+
+										<!---<input id="openEmail" type="email" class="form-control" placeholder="Email address" required autofocus>--->
+										<input id="openUsername" type="txID" class="form-control" placeholder="Username" required autofocus>
+										<input id="openPass" type="password" class="form-control" placeholder="Password" required>
+										<input id="openPassConfirm" type="password" class="form-control" placeholder="Password confirm" required>
+										<br>
+										<div id="openLoginStatus" class="alert alert-danger hidden"></div>
+										<button id="setupAccountBtn" class="btn btn-lg btn-primary btn-block" type="submit">Setup Account</button>
+									</form>
+								</div>
+								<div class="col-md-12 hidden" id="logout123">
+									<p><span style="float:right;"><a href="javascript:;" id="walletLogout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></span> Welcome <span class="username"></span></p>
+								</div>
+								<div id="openWallet" class="hidden">
+									<div class="row">
+										
+										<div class="col-md-12" align="center">
+											<div class="alert alert-success">
+												<b>Notice</b>: You only need the Public Key to activate your account, but you can backup the Private Key in case you lose your username/password combination.
+												
+											</div>
+											<br>
+											<div style="text-align:center; width:350px;">
+												<ul class="nav nav-pills" role="tablist">
+													<!--<li role="presentation"><a href="javascript:;" id="walletShowKeys">Keys</a></li>-->
+												</ul>
+
+												<br>
+
+												<div id="walletKeys">
+													<label>Public Key</label>
+													<input class="form-control pubkey" type="text" readonly>
+													</br>
+													<label>Private key</label>
+													<div class="input-group">
+														<input class="form-control privkey" type="password" readonly>
+
+														<span class="input-group-btn">
+															<button class="showKey btn btn-default" type="button">Show</button>
+														</span>
+													</div>
+												</div>
+
+	</body>
+</html>
