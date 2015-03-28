@@ -130,7 +130,10 @@ $(document).ready(function() {
 			seperateTrans.splice(0,1);
 			a = seperateTrans.length;
 			var y=a;
+			var h ='';
+			h += '<span>'+y+'</span>';
 			$("#ready").removeClass("hidden").show();
+			$(h).appendTo("#ready .numTransactions");
 		}
 		else{
 			$("#notCorrectLogin").removeClass("hidden").fadeIn().fadeOut().fadeIn();
