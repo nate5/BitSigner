@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		
-		<title>Account Setup</title>
+		<title>Redeem Bitcoin</title>
 
         	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 		<meta name="keywords" content="" />
@@ -28,8 +28,6 @@
 		<script type="text/javascript" src="js/coinbin.js"></script>
 	</head>
 
-
-
 	<body>
 		<div id="wrap">
 			<!-- Fixed navbar -->
@@ -39,10 +37,10 @@
 						<ul class="nav navbar-nav">
 							<li class="dropdown">
 								<li><a href="index.html"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-								<li class="active"><a href="setupAccount.html"><span class="glyphicon glyphicon-cog"></span> Setup Account</a></li>
+								<li><a href="setupAccount.html"><span class="glyphicon glyphicon-cog"></span> Setup Account</a></li>
 								<li><a href="verify.html"><span class="glyphicon glyphicon-ok"></span> Verify</a></li>
 								<li><a href="easySign.html"><span class="glyphicon glyphicon-flash"></span> Redeem Bitcoin (Easy)</a></li>
-								<li><a href="hardSign.html"><span class="glyphicon glyphicon-lock"></span> Redeem Bitcoin (Most Secure)</a></li>
+								<li class="active"><a href="hardSign.html"><span class="glyphicon glyphicon-lock"></span> Redeem Bitcoin (Most Secure)</a></li>
 							</li>
 						</ul>
 					</div>
@@ -50,7 +48,6 @@
 			</div>
 
 			<div id="content" class="container">
-				
 				<div class="alert alert-danger hidden" id="isConnected">
 					<span class="glyphicon glyphicon-exclamation-sign"></span> <b>WARNING</b>: You are connected to the internet! Click <a href='index.html#internetWarning' target="_blank" class="alert-link">HERE</a> to learn why this could be dangerous.
 					
@@ -66,56 +63,127 @@
 					<div class="tab-pane tab-content active" id="home">
 						<div class="row">
 							<div class="col-md-12">
-								<!--<h2>Open Wallet <small> browser based bitcoin wallet</small></h2>-->
-								<div id="openLogin">
-									<form class="form-signin" role="form" action="javascript:;">
-										
-
-										<div class="alert alert-warning">
-											<span class="glyphicon glyphicon-info-sign"></span> <b>Notice</b>: Different username and password combinations will open different wallets, be careful when entering your details as lost accounts can not be recovered! 
-										</div>
-
-										<!---<input id="openEmail" type="email" class="form-control" placeholder="Email address" required autofocus>--->
-										<input id="openUsername" type="txID" class="form-control" placeholder="Username" required autofocus>
-										<input id="openPass" type="password" class="form-control" placeholder="Password" required>
-										<input id="openPassConfirm" type="password" class="form-control" placeholder="Password confirm" required>
-										<br>
-										<div id="openLoginStatus" class="alert alert-danger hidden"></div>
-										<button id="setupAccountBtn" class="btn btn-lg btn-primary btn-block" type="submit">Setup Account</button>
-									</form>
-								</div>
 								<div class="col-md-12 hidden" id="logout123">
-									<p><span style="float:right;"><a href="javascript:;" id="walletLogout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></span> Welcome <span class="username"></span></p>
+									<p><span style="float:right;"><a href="javascript:;" id="walletLogout"><span class="glyphicon glyphicon-log-out"></span> Cancel Process/Logout</a></span> Welcome user</p>
 								</div>
-								<div id="openWallet" class="hidden">
-									<div class="row">
-										
-										<div class="col-md-12" align="center">
-											<div class="alert alert-success">
-												<b>Notice</b>: You only need the Public Key to activate your account, but you can backup the Private Key in case you lose your username/password combination.
-												
-											</div>
-											<br>
-											<div style="text-align:center; width:350px;">
-												<ul class="nav nav-pills" role="tablist">
-													<!--<li role="presentation"><a href="javascript:;" id="walletShowKeys">Keys</a></li>-->
-												</ul>
+								</br>
+<script type="text/javascript">
+	$("#walletLogout").click(function(){
+		$("#walletKeys").addClass("hidden");
+		$("#logout123").addClass("hidden");
+		$("#verify1").addClass("hidden");
+		$("#sign").addClass("hidden");
+		$("#broadcast").addClass("hidden");
+	});
+	
+</script>
+					
+					<div class="alert alert-danger hidden" id="notCorrectLogin">
+								<span class="glyphicon glyphicon-exclamation-sign"></span> You are not logged into the account that needs to sign these transactions. Please log out and try again.
+					</div>
 
-												<br>
-
-												<div id="walletKeys">
-													<label>Public Key</label>
-													<input class="form-control pubkey" type="text" readonly>
-													</br>
-													<label>Private key</label>
-													<div class="input-group">
-														<input class="form-control privkey" type="password" readonly>
-
-														<span class="input-group-btn">
-															<button class="showKey btn btn-default" type="button">Show</button>
-														</span>
-													</div>
-												</div>
-
-	</body>
-</html>
+					<div class="tab-pane tab-content" id="verify">
+						<h2>Verify/Sign transaction(s)</h2>
+						<div class="row">
+							<div class="col-md-12">
+								<p>Enter the transaction script (given to you by the website) to convert it into a readable format that can be verified manually.</p>
+								<textarea type="text" id="verifyScript" class="form-control" style="height:125px"></textarea>
+								</br>
+								<input type="text" id="pubKey" class="form-control" placeholder="Your Public Key">
+								<input type="password" id="privKey" class="form-control" placeholder="Your Private Key">
+								</br>
+								<button id="privBtn" class="btn btn-lg btn-primary btn-block" type="submit">Start Signing Process</button>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane tab-content hidden" id="ready">
+						<div class="row">
+							<div class="col-md-12">
+								<h2 align="middle">Are you ready to sign <span class="numTransactions"></span> transaction(s)?</h2>
+								</br>
+								
+								<input align="middle" type="button" value="Yes" class="btn btn-lg btn-primary btn-block" id="readyBtn">
+								
+							</div>
+						</div>	
+					</div>
+					<div class="tab-pane tab-content hidden" id="show">
+						<div id="outerShowHolder">
+							<div class="alert alert-danger" id="warning">
+								<a href="#" class="close" data-dismiss="alert" style="top:50%">&times;</a>
+								<span><br></span>
+								<span class="glyphicon glyphicon-exclamation-sign"></span> <b>IMPORTANT</b>: Please check to make sure that the field highlighted in white is correct and accurate. The bitcoin value should be the purchase price for the transaction minus the commission. Check the bitcoin address to make sure it's an address you control. If the address is incorrect or you lose your passphrase for that wallet, you may not be able to recover the funds after you have signed and broadcast the transaction. The other field is the market's commission.
+							</div>
+							<div class="alert alert-info hidden" id="skippedSuccessfully">
+								<span class="glyphicon glyphicon-info-sign"></span> Transaction skipped.
+							</div>
+							<div class="alert alert-success hidden" id="signedSuccessfully">
+								<span class="glyphicon glyphicon-ok-sign"></span> Transaction successfully signed.
+							</div>
+							<div id="showHolder">
+								<div id="shower" class="hidden">
+									<div class="alert alert-info transactionInfo" id="transactionInfo">
+										<table class="table table-striped table-hover transactionInfoTable">
+											<span class="transInfoTD"><span class="glyphicon glyphicon-info-sign"></span> Please verify the following transaction and either sign or skip.<span style="float:right" class="numTrans">Transaction </span></span>
+											<thead>
+												<tr style="font-weight:bold;" class="center">
+													<td><abbr title="the amount the address is being sent">Amount</abbr></td><td></td><td><abbr title="address the funds are being sent to">Address</abbr></td>
+												</tr>
+											</thead>
+											<tbody>
+											</tbody>
+										</table>
+										<h3>Transaction #<span class="showTxNum"></span></h3>
+									</div>
+								</div>
+							</div>
+							<input type="submit" value="Sign" style="background:Green" class="btn btn-lg btn-primary btn-block" id="signBtn">
+							<span></br> </span>
+							<input type="submit" value="Skip" style="" class="btn btn-lg btn-primary btn-block" id="skipBtn">
+							<span></br> </span>
+							<span></br> </span>
+							<input type="submit" value="Skip Rest" style="background:Red" class="btn btn-lg btn-primary btn-block" id="finishBtn">
+							
+							
+						</div>
+					</div>
+					<div class="tab-pane tab-content hidden" id="skipInfo">
+						<div id="skippedInfoHolder">
+							<div class="alert alert-info hidden" id="skippedInfo">
+								<span class="glyphicon glyphicon-info-sign"></span> <b>Notice</b>: If the transaction's outputs are not correct, please contact support with the subject line "Problem with Transaction #<span class="outputTx"></span>".
+							</div>
+						</div>
+						<h2 align="middle">Are you sure you would like to skip this transaction?</h2>
+						<span></br></span>
+						<span></br></span>
+						<input type="submit" value="No, Go Back" style="" class="btn btn-lg btn-primary btn-block" id="noSkipBtn">
+						<span></br></span>
+						<input type="submit" value="Yes, Skip" style="" class="btn btn-lg btn-primary btn-block" id="yesSkipBtn">
+						
+					</div>
+					<div class="tab-pane tab-content hidden" id="finishInfo">
+						<h2 align="middle">Are you sure you would like to skip the rest of your transactions?</h2>
+						<span></br></span>
+						<span></br></span>
+						<input type="submit" value="No, Go Back" style="" class="btn btn-lg btn-primary btn-block" id="noFinishBtn">
+						<span></br></span>
+						<input type="submit" value="Yes, Skip All" style="background:Red" class="btn btn-lg btn-primary btn-block" id="yesFinishBtn">
+						
+					</div>
+					<div class="tab-pane tab-content hidden" id="showAll">
+						<div class="alert alert-success hidden" id="showAllAlert">
+								<span class="glyphicon glyphicon-ok-sign"></span> The following transactions have been successfully signed: <span style="float:right"><span class="numTransGood"></span> Transaction(s)</span>
+								<span></br></span>
+								<span></br></span>
+								<span class="allSignedHex"></span>
+						</div>
+						<div class="alert alert-danger hidden" id="showAllAlertBad">
+								<span class="glyphicon glyphicon-exclamation-sign"></span> The following transactions have not been signed: <span style="float:right"><span class="numTransFailed"></span> Transaction(s)</span>
+								<span></br></span>
+								<span></br></span>
+								<span class="allNotSignedHex"></span>
+						</div>
+					</div>
+					
+				</div>
+			</div>
