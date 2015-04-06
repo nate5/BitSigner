@@ -6,6 +6,7 @@ How to use via Tor:
 3. Follow instructions there
 
 How to work offline in the Tor Browser:
+
 1. Open the menu dropdown in the top right corner
 2. Click the box "Developer" with the wrench icon
 3. Click "Work Offline" (last option in the list)
