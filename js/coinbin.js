@@ -2,7 +2,7 @@ $(document).ready(function() {
 	
 	window.onload=doesConnectionExist();
 
-	/* Detect if online */
+	/* Detect if online - if true, display connection warning */
 	function doesConnectionExist() {
 		if(navigator.onLine===true){
 			$("#isConnected").removeClass("hidden").fadeIn().fadeOut().fadeIn();
@@ -193,22 +193,6 @@ $(document).ready(function() {
 		
 		window.location.reload();
 	});
-
-	/* broadcast a transaction (not being used at this time)
-
-	$("#rawSubmitBtn").click(function(){
-		var tx = coinjs.transaction();
-		tx.broadcast(function(data){
-			$("#rawTransactionStatus").html(unescape($(data).find("response").text()).replace(/\+/g,' ')).removeClass('hidden');
-			if($(data).find("result").text()==1){
-				$("#rawTransactionStatus").addClass('alert-success').removeClass('alert-danger');
-				$("#rawTransactionStatus").html('txid: '+$(data).find("txid").text());
-			} else {
-				$("#rawTransactionStatus").addClass('alert-danger').removeClass('alert-success').prepend('<span class="glyphicon glyphicon-exclamation-sign"></span> ');
-			}
-			$("#rawTransactionStatus").fadeOut().fadeIn();
-		}, $("#rawTransaction").val());
-	});*/
 	
 
 	/* readyBtn Code */
@@ -311,7 +295,6 @@ $(document).ready(function() {
 
 		if($("#shower"+x+" .has-error").length==0){
 			var t;
-			//$("#signedDataError").addClass('hidden');
 			try {
 				var tx = coinjs.transaction();
 				t = tx.deserialize(script);
